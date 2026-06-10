@@ -1,6 +1,6 @@
 /**
- * admin.js — TAG Admin v5.1
- * Fixed: new insights default to published | image compression | imageData preserved on edit
+ * admin.js — TAG Admin v5.2
+ * Fixed: Media Library upload now correctly uses Cloudinary via mediaService
  * ALL data access via service layer. No direct localStorage.
  */
 
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// ── NAV ───────────────────────────────────────────────────────────────
+// ── NAV ────────────────────────────────────────────────────────────
 function navTo(sec, btn) {
   document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('on'));
   if (btn) btn.classList.add('on');
@@ -69,7 +69,7 @@ function loadSection(s) {
   else if (s === 'settings')  renderSettings();
 }
 
-// ── STATS ─────────────────────────────────────────────────────────────
+// ── STATS ────────────────────────────────────────────────────────────
 function updateStats() {
   Promise.all([
     insightService.getAll(),
@@ -442,61 +442,81 @@ function savePodcastModal() {
 }
 
 // ── GALLERY / MEDIA LIBRARY ───────────────────────────────────────────
+/**
+ * renderGalleryAdmin — Displays uploaded media in the admin gallery grid
+ * Fetches all gallery items from the database and renders them with preview + delete button
+ */
 function renderGalleryAdmin() {
   const grid = document.getElementById('gallery-admin-grid');
   if (!grid) return;
+  
   mediaService.getAll().then(items => {
-    if (!items.length) { grid.innerHTML = '<div class="tbl-empty">No media yet. Upload images using the form above.</div>'; return; }
-    grid.innerHTML = items.map(item => `
+    if (!items.length) { 
+      grid.innerHTML = '<div class="tbl-empty">No media yet. Upload images using the form above.</div>'; 
+      return; 
+    }
+    
+    grid.innerHTML = items.map(item => {
+      const uploadDate = item.uploaded_at 
+        ? new Date(item.uploaded_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })
+        : '';
+      return `
       <div style="position:relative;border-radius:10px;overflow:hidden;background:var(--s2);aspect-ratio:4/3;border:1px solid var(--bdr)">
-        <img src="${item.dataUrl||item.url||''}" alt="${item.alt||item.caption||''}"
+        <img src="${item.url||''}" alt="${item.alt||item.caption||''}"
           style="width:100%;height:100%;object-fit:cover" onerror="this.style.opacity='.2'">
         <div style="position:absolute;top:6px;right:6px">
           <button class="abtn abtn-del" onclick="mediaService.delete('${item.id}').then(()=>{renderGalleryAdmin();updateStats();aToast('Removed')})">&#x2715;</button>
         </div>
-        ${item.caption?`<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.75);padding:5px 8px;font-size:10.5px;color:var(--tx2)">${item.caption}</div>`:''}
-      </div>`).join('');
+        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.75);padding:6px 8px">
+          ${item.caption?`<div style="font-size:10.5px;color:var(--tx2);margin-bottom:3px">${item.caption}</div>`:''}
+          ${uploadDate?`<div style="font-size:9px;color:rgba(255,255,255,.6)">${uploadDate}</div>`:''}
+        </div>
+      </div>`;
+    }).join('');
   });
 }
 
-function handleGalleryUpload(input) {
+/**
+ * handleGalleryUpload — Process file selection from gallery upload input
+ * 
+ * FIXED: Now correctly uses mediaService.upload() to send files to Cloudinary
+ * via /api/media/upload endpoint instead of storing base64 directly.
+ * 
+ * Flow:
+ * 1. Get selected files from input
+ * 2. For each file: call mediaService.upload(file, {category, caption, alt})
+ * 3. mediaService sends to /api/media/upload with auth token
+ * 4. Backend uploads to Cloudinary with folder: techno_ai_genius/general
+ * 5. Backend saves Cloudinary URL + metadata to PostgreSQL gallery table
+ * 6. Frontend receives response and updates gallery-admin-grid
+ * 7. Public /media page automatically sees new images (same API endpoint)
+ */
+async function handleGalleryUpload(input) {
   const files = input.files;
   if (!files || !files.length) return;
+  
   const cap = document.getElementById('gallery-caption')?.value?.trim() || '';
-  aToast('Uploading and compressing...');
+  aToast('Uploading to Cloudinary...');
 
-  // Compress each image before storing
   const uploads = Array.from(files).map(file => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        compressImage(e.target.result, 1200, 0.8).then(compressed => {
-          const item = {
-            filename: file.name,
-            url: compressed,
-            dataUrl: compressed,
-            type: 'image/jpeg',
-            size: compressed.length,
-            category: 'general',
-            caption: cap,
-            alt: cap || file.name,
-            uploadedAt: new Date().toISOString(),
-          };
-          storageService.append('gallery', item).then(resolve).catch(reject);
-        });
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
+    return mediaService.upload(file, {
+      category: 'general',
+      caption: cap,
+      alt: cap || file.name
     });
   });
 
-  Promise.all(uploads)
-    .then(items => {
-      renderGalleryAdmin(); updateStats();
-      aToast(`${items.length} image${items.length>1?'s':''} uploaded ✓`, 'success');
-      if (input) input.value = '';
-    })
-    .catch(err => aToast(err.message || 'Upload failed — image may be too large', 'err'));
+  try {
+    const results = await Promise.all(uploads);
+    renderGalleryAdmin();
+    updateStats();
+    aToast(`${results.length} image${results.length > 1 ? 's' : ''} uploaded ✓`, 'success');
+    if (input) input.value = '';
+    const capInput = document.getElementById('gallery-caption');
+    if (capInput) capInput.value = '';
+  } catch (err) {
+    aToast(err.message || 'Upload failed', 'err');
+  }
 }
 
 // ── COMMUNITY TABLE ───────────────────────────────────────────────────
