@@ -1,6 +1,6 @@
 /**
- * admin.js — TAG Admin v5.2
- * Fixed: Media Library upload now correctly uses Cloudinary via mediaService
+ * admin.js — TAG Admin v5.3
+ * Fixed: Media Library with explicit upload button and proper caption handling
  * ALL data access via service layer. No direct localStorage.
  */
 
@@ -445,6 +445,7 @@ function savePodcastModal() {
 /**
  * renderGalleryAdmin — Displays uploaded media in the admin gallery grid
  * Fetches all gallery items from the database and renders them with preview + delete button
+ * Shows caption and upload date below each image
  */
 function renderGalleryAdmin() {
   const grid = document.getElementById('gallery-admin-grid');
@@ -467,9 +468,9 @@ function renderGalleryAdmin() {
         <div style="position:absolute;top:6px;right:6px">
           <button class="abtn abtn-del" onclick="mediaService.delete('${item.id}').then(()=>{renderGalleryAdmin();updateStats();aToast('Removed')})">&#x2715;</button>
         </div>
-        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.75);padding:6px 8px">
-          ${item.caption?`<div style="font-size:10.5px;color:var(--tx2);margin-bottom:3px">${item.caption}</div>`:''}
-          ${uploadDate?`<div style="font-size:9px;color:rgba(255,255,255,.6)">${uploadDate}</div>`:''}
+        <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.75);padding:8px 10px">
+          ${item.caption?`<div style="font-size:10.5px;color:var(--tx2);margin-bottom:4px;line-height:1.3">${item.caption}</div>`:''}
+          ${uploadDate?`<div style="font-size:8.5px;color:rgba(255,255,255,.5)">${uploadDate}</div>`:''}
         </div>
       </div>`;
     }).join('');
@@ -479,29 +480,48 @@ function renderGalleryAdmin() {
 /**
  * handleGalleryUpload — Process file selection from gallery upload input
  * 
- * FIXED: Now correctly uses mediaService.upload() to send files to Cloudinary
- * via /api/media/upload endpoint instead of storing base64 directly.
- * 
- * Flow:
- * 1. Get selected files from input
- * 2. For each file: call mediaService.upload(file, {category, caption, alt})
- * 3. mediaService sends to /api/media/upload with auth token
- * 4. Backend uploads to Cloudinary with folder: techno_ai_genius/general
- * 5. Backend saves Cloudinary URL + metadata to PostgreSQL gallery table
- * 6. Frontend receives response and updates gallery-admin-grid
- * 7. Public /media page automatically sees new images (same API endpoint)
+ * Now with explicit upload button:
+ * 1. User selects files
+ * 2. User enters caption (optional)
+ * 3. User clicks UPLOAD button
+ * 4. Caption is passed to each file upload
+ * 5. Backend saves caption to database
+ * 6. Frontend renders gallery with captions
+ * 7. Public /media page auto-syncs
  */
-async function handleGalleryUpload(input) {
+let _galleryPendingFiles = null;  // Store selected files until upload button clicked
+
+function handleGalleryFileSelect(input) {
   const files = input.files;
-  if (!files || !files.length) return;
+  if (!files || !files.length) {
+    _galleryPendingFiles = null;
+    return;
+  }
+  
+  // Store files for later upload
+  _galleryPendingFiles = files;
+  const uploadBtn = document.getElementById('gallery-upload-btn');
+  if (uploadBtn) uploadBtn.disabled = false;
+  
+  aToast(`${files.length} file${files.length > 1 ? 's' : ''} selected. Click Upload to proceed.`);
+}
+
+async function handleGalleryUpload() {
+  if (!_galleryPendingFiles || !_galleryPendingFiles.length) {
+    aToast('No files selected', 'err');
+    return;
+  }
   
   const cap = document.getElementById('gallery-caption')?.value?.trim() || '';
+  const uploadBtn = document.getElementById('gallery-upload-btn');
+  
+  if (uploadBtn) { uploadBtn.disabled = true; uploadBtn.textContent = 'Uploading...'; }
   aToast('Uploading to Cloudinary...');
 
-  const uploads = Array.from(files).map(file => {
+  const uploads = Array.from(_galleryPendingFiles).map(file => {
     return mediaService.upload(file, {
       category: 'general',
-      caption: cap,
+      caption: cap,  // Caption passed to every file
       alt: cap || file.name
     });
   });
@@ -511,11 +531,18 @@ async function handleGalleryUpload(input) {
     renderGalleryAdmin();
     updateStats();
     aToast(`${results.length} image${results.length > 1 ? 's' : ''} uploaded ✓`, 'success');
-    if (input) input.value = '';
+    
+    // Clear inputs
+    const fileInput = document.getElementById('gallery-file-input');
+    if (fileInput) fileInput.value = '';
     const capInput = document.getElementById('gallery-caption');
     if (capInput) capInput.value = '';
+    
+    _galleryPendingFiles = null;
   } catch (err) {
     aToast(err.message || 'Upload failed', 'err');
+  } finally {
+    if (uploadBtn) { uploadBtn.disabled = true; uploadBtn.textContent = 'Upload'; }
   }
 }
 
