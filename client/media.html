@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Media â€” Techno AI Genius</title>
+ <link rel="icon" type="image/png" href="/assets/favicon.png">
+<meta name="description" content="Visual archive from Techno AI Genius â€” events, workshops, and productions.">
+<meta name="theme-color" content="#04040F">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* Media gallery enhancements */
+.gallery-section { margin-bottom:40px; }
+.gallery-section-title {
+  font-family:Syne,sans-serif; font-size:15px; font-weight:700;
+  color:var(--sub); text-transform:uppercase; letter-spacing:.08em;
+  margin-bottom:14px; display:flex; align-items:center; gap:8px;
+}
+.gallery-section-title::after {
+  content:''; flex:1; height:1px; background:var(--bdr);
+}
+.gallery-grid-media {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+  gap:14px;
+}
+@media(max-width:600px){ .gallery-grid-media{ grid-template-columns:repeat(2,1fr); gap:10px; } }
+.gallery-item-media {
+  position:relative; border-radius:var(--r); overflow:hidden;
+  background:var(--s2); aspect-ratio:4/3; cursor:pointer;
+  border:1px solid var(--bdr); transition:var(--t);
+}
+.gallery-item-media:hover { transform:translateY(-4px); border-color:rgba(151,71,255,.3); box-shadow:0 12px 32px rgba(0,0,0,.4); }
+.gallery-item-media img { width:100%; height:100%; object-fit:cover; transition:transform .5s var(--ease,cubic-bezier(.4,0,.2,1)); }
+.gallery-item-media:hover img { transform:scale(1.06); }
+.gallery-item-media-overlay {
+  position:absolute; inset:0; background:linear-gradient(to top,rgba(4,4,15,.85) 0%,transparent 50%);
+  opacity:0; transition:var(--t);
+}
+.gallery-item-media:hover .gallery-item-media-overlay { opacity:1; }
+.gallery-item-media-cap {
+  position:absolute; bottom:0; left:0; right:0; padding:10px 12px;
+  font-size:12px; font-weight:600; color:white; transform:translateY(6px);
+  opacity:0; transition:var(--t);
+}
+.gallery-item-media:hover .gallery-item-media-cap { transform:translateY(0); opacity:1; }
+
+/* Upload CTA */
+.media-upload-cta {
+  background:linear-gradient(135deg,rgba(151,71,255,.07),rgba(0,229,255,.05));
+  border:1px dashed rgba(151,71,255,.2); border-radius:var(--r-lg);
+  padding:40px 32px; text-align:center; margin-top:40px;
+}
+</style>
+</head>
+<body><nav id="nav">
+<div class="nav-inner">
+  <a href="index" class="nav-logo">
+    <img src="assets/logo.svg" alt="TAG" style="height:32px;width:auto">
+     
+  </a>
+  <div class="nav-links"><a href="index">Home</a><a href="about">About</a><a href="insights">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media" class="active">Media</a><a href="contact">Contact</a></div>
+  <div class="nav-right">
+    <a href="community" class="btn btn-primary btn-sm">Join Free</a>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div>
+</nav>
+<div class="mob-nav">
+  <button class="mob-close">&#x2715;</button>
+  <a href="index">Home</a><a href="about">About</a><a href="insights">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media">Media</a><a href="contact">Contact</a>
+  <a href="community" class="btn btn-primary" style="margin-top:12px">Join Free</a>
+</div>
+
+<div class="page-hero">
+<div class="page-hero-bg" style="background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(151,71,255,.07),transparent 65%)"></div>
+<div class="wrap">
+  <span class="tag tag-vi">Media</span>
+  <h1>Visual <span class="g-vi">archive.</span></h1>
+  <p>Photos, graphics, and visual content from Techno AI Genius events, workshops, and productions.</p>
+</div>
+</div>
+
+<section class="section-sm">
+<div class="wrap">
+
+  <!-- Category filters -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px" id="gallery-filter-bar">
+    <button class="btn btn-ghost btn-sm cat-btn on" onclick="filterGallery('all',this)">All</button>
+    <button class="btn btn-ghost btn-sm cat-btn" onclick="filterGallery('events',this)">Events</button>
+    <button class="btn btn-ghost btn-sm cat-btn" onclick="filterGallery('general',this)">Editorial</button>
+  </div>
+
+  <!-- Gallery grid (populated from storage + seed) -->
+  <div class="gallery-grid-media" id="gallery-grid"></div>
+
+  <!-- Empty state -->
+  <div id="gallery-empty" style="display:none" class="media-upload-cta">
+    <span style="font-size:44px;display:block;margin-bottom:14px">ðŸ“·</span>
+    <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">Gallery Loading...</h3>
+    <p style="color:var(--sub);font-size:14px;max-width:400px;margin:0 auto">Visual content from events and productions appears here. Upload images via the admin panel.</p>
+  </div>
+
+</div>
+</section>
+<footer><div class="wrap">
+<div class="foot-grid">
+  <div class="foot-brand">
+    <a href="index" class="nav-logo">
+      <img src="assets/logo.svg" alt="TAG" style="height:28px;width:auto">
+       
+    </a>
+    <p>AI education built for the generation that will actually live with this technology. Open, honest, free â€” always.</p>
+    <div class="socials">
+      <a href="mailto:info@technoaigenius.com" class="soc-btn" title="Email">&#9993;</a>
+    </div>
+  </div>
+  <div class="foot-col"><h4>Content</h4><ul>
+    <li><a href="insights">Insights</a></li>
+    <li><a href="insights?type=article">Articles</a></li>
+    <li><a href="insights?type=opinion">Opinions</a></li>
+    <li><a href="videos">Videos</a></li>
+    <li><a href="podcast">Podcast</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>Platform</h4><ul>
+    <li><a href="events">Events</a></li>
+    <li><a href="community">Community</a></li>
+    <li><a href="media">Media</a></li>
+    <li><a href="about">About TAG</a></li>
+    <li><a href="contact">Contact</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>TAG</h4><ul>
+    <li><a href="about">About</a></li>
+    <li><a href="community">Join Free</a></li>
+    <li><a href="sitemap.xml">Sitemap</a></li>
+  </ul></div>
+</div>
+<div class="foot-bottom">
+  <p>&copy; 2024 <span>Techno AI Genius</span>. Founded by Varish Gahlot, South Brunswick HS, NJ.</p>
+  <p>Free, always &mdash; for every student, everywhere.</p>
+</div>
+</div></footer>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+let _galCat = 'all';
+
+function filterGallery(cat, btn) {
+  _galCat = cat;
+  document.querySelectorAll('#gallery-filter-bar .cat-btn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  renderGalleryPage();
+}
+
+function renderGalleryPage() {
+  const grid = document.getElementById('gallery-grid');
+  const empt = document.getElementById('gallery-empty');
+  if (!grid) return;
+
+  mediaService.getAll().then(items => {
+    const filtered = _galCat === 'all' ? items : items.filter(i => i.category === _galCat);
+
+    if (!filtered.length) {
+      if (empt) empt.style.display = 'block';
+      grid.innerHTML = '';
+      return;
+    }
+    if (empt) empt.style.display = 'none';
+
+    grid.innerHTML = filtered.map(item => `
+      <div class="gallery-item-media" onclick="openLightbox('${item.id}')">
+        <img src="${item.dataUrl||item.url||''}" alt="${item.alt||item.caption||''}" loading="lazy"
+          onerror="this.style.opacity='.15'">
+        <div class="gallery-item-media-overlay"></div>
+        <div class="gallery-item-media-cap">${item.caption||''}</div>
+      </div>`).join('');
+    observeSR();
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderGalleryPage);
+</script>
+
+</body></html>

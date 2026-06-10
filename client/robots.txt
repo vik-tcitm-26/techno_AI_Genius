@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /services/
+Disallow: /js/admin.js
+
+Sitemap: https://technoaigenius.com/sitemap.xml

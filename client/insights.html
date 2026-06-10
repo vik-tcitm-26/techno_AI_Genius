@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Insights â€” Techno AI Genius</title>
+ <link rel="icon" type="image/png" href="/assets/favicon.png">
+<meta name="description" content="Articles, opinions, and deep conversations on AI, ethics, healthcare, education, and the future.">
+<meta property="og:title" content="Insights â€” Techno AI Genius">
+<meta property="og:description" content="Articles, opinions, and deep conversations on AI, ethics, healthcare, education, and the future.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Techno AI Genius">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insights â€” Techno AI Genius">
+<meta name="twitter:description" content="Articles, opinions, and deep conversations on AI, ethics, healthcare, education, and the future.">
+<meta name="theme-color" content="#04040F">
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body><nav id="nav">
+<div class="nav-inner">
+  <a href="index" class="nav-logo">
+    <img src="assets/logo.svg" alt="Techno AI Genius" style="height:32px;width:auto">
+     
+  </a>
+  <div class="nav-links"><a href="index">Home</a><a href="about">About</a><a href="insights" class="active">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media">Media</a><a href="contact">Contact</a></div>
+  <div class="nav-right">
+    <a href="community" class="btn btn-primary btn-sm">Join Free</a>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div>
+</nav>
+<div class="mob-nav">
+  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">&#x2715;</button>
+  <a href="index">Home</a><a href="about">About</a><a href="insights">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media">Media</a><a href="contact">Contact</a>
+  <a href="community" class="btn btn-primary" style="margin-top:12px">Join Free</a>
+</div>
+<div class="page-hero"><div class="page-hero-bg"></div>
+<div class="wrap">
+  <span class="tag tag-cy">Insights</span>
+  <h1>Ideas about <span class="g-cy">AI</span> that matter.</h1>
+  <p>Articles, opinion pieces, and deep conversations â€” honest writing on machine learning, ethics, creativity, and the future, across seven subcategories.</p>
+</div></div>
+
+<section class="section-sm">
+<div class="wrap">
+  <!-- Type filter -->
+  <div style="margin-bottom:20px;display:flex;align-items:center;gap:6px;flex-wrap:wrap" data-filter-group>
+    <button class="btn btn-ghost btn-sm cat-btn on" onclick="filterIns('all',this,'type');_insType='all'">All Types</button>
+    <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('article',this,'type');_insType='article'">Articles</button>
+    <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('opinion',this,'type');_insType='opinion'">&#9997; Opinions</button>
+    <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('conversation',this,'type');_insType='conversation'">&#127897; Conversations</button>
+  </div>
+  <!-- Subcategory filter -->
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap">
+    <div style="display:flex;gap:6px;flex-wrap:wrap" data-filter-group>
+      <button class="btn btn-ghost btn-sm cat-btn on" onclick="filterIns('all',this,'cat');_insCat='all'">All Topics</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('AI & Technology',this,'cat');_insCat='AI & Technology'">AI &amp; Tech</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Future of Humanity',this,'cat');_insCat='Future of Humanity'">Future</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Thought Leadership',this,'cat');_insCat='Thought Leadership'">Leadership</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Industry Analysis',this,'cat');_insCat='Industry Analysis'">Industry</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Research & Vision',this,'cat');_insCat='Research & Vision'">Research</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Deep Conversations',this,'cat');_insCat='Deep Conversations'">Conversations</button>
+      <button class="btn btn-ghost btn-sm cat-btn" onclick="filterIns('Innovation',this,'cat');_insCat='Innovation'">Innovation</button>
+    </div>
+    <input class="form-input" id="ins-search" type="text" placeholder="Search..." style="width:190px"
+      oninput="_insQ=this.value.toLowerCase();renderInsights()">
+  </div>
+  <div class="grid-3" id="insights-grid"></div>
+</div>
+</section>
+<footer>
+<div class="wrap">
+<div class="foot-grid">
+  <div class="foot-brand">
+    <a href="index" class="nav-logo">
+      <img src="assets/logo.svg" alt="Techno AI Genius" style="height:28px;width:auto">
+       
+    </a>
+    <p>AI education built for the generation that will actually live with this technology. Open, honest, free â€” always.</p>
+    <div class="socials">
+      <a href="https://www.youtube.com/@MindwareToMetaverse" target="_blank" rel="noopener" class="soc-btn" title="YouTube">&#9654;</a>
+      <a href="mailto:info@technoaigenius.com" class="soc-btn" title="Email">&#9993;</a>
+    </div>
+  </div>
+  <div class="foot-col"><h4>Content</h4><ul>
+    <li><a href="insights">Insights</a></li>
+    <li><a href="insights?type=article">Articles</a></li>
+    <li><a href="insights?type=opinion">Opinions</a></li>
+    <li><a href="insights?type=conversation">Conversations</a></li>
+    <li><a href="videos">Videos</a></li>
+    <li><a href="podcast">Podcast</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>Platform</h4><ul>
+    <li><a href="events">Events</a></li>
+    <li><a href="community">Community</a></li>
+    <li><a href="media">Media</a></li>
+    <li><a href="about">About TAG</a></li>
+    <li><a href="contact">Contact</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>Connect</h4><ul>
+    <li><a href="https://www.youtube.com/@MindwareToMetaverse" target="_blank">YouTube</a></li>
+    <li><a href="mailto:info@technoaigenius.com">Email Us</a></li>
+    <li><a href="sitemap.xml">Sitemap</a></li>
+  </ul></div>
+</div>
+<div class="foot-bottom">
+  <p>&copy; 2024 <span>Techno AI Genius</span>. Founded by Varish Gahlot, South Brunswick HS, NJ.</p>
+  <p>Free, always &mdash; for every student, everywhere.</p>
+</div>
+</div>
+</footer>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Check URL param for type pre-filter
+  const params = new URLSearchParams(location.search);
+  const t = params.get('type');
+  if (t) { _insType = t; }
+  renderInsights();
+});
+</script>
+</body>
+</html>

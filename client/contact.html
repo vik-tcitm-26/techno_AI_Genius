@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact â€” Techno AI Genius</title>
+ <link rel="icon" type="image/png" href="/assets/favicon.png">
+<meta name="description" content="Get in touch with Techno AI Genius â€” pitch a conversation, suggest an event, or just say hello.">
+<meta property="og:title" content="Contact â€” Techno AI Genius">
+<meta property="og:description" content="Get in touch with Techno AI Genius â€” pitch a conversation, suggest an event, or just say hello.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Techno AI Genius">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact â€” Techno AI Genius">
+<meta name="twitter:description" content="Get in touch with Techno AI Genius â€” pitch a conversation, suggest an event, or just say hello.">
+<meta name="theme-color" content="#04040F">
+
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Michroma&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body><nav id="nav">
+<div class="nav-inner">
+  <a href="index" class="nav-logo">
+    <img src="assets/logo.svg" alt="Techno AI Genius" style="height:32px;width:auto">
+     
+  </a>
+  <div class="nav-links"><a href="index">Home</a><a href="about">About</a><a href="insights">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media">Media</a><a href="contact" class="active">Contact</a></div>
+  <div class="nav-right">
+    <a href="community" class="btn btn-primary btn-sm">Join Free</a>
+    <button class="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</div>
+</nav>
+<div class="mob-nav">
+  <button class="mob-close" onclick="document.querySelector('.mob-nav').classList.remove('open')">&#x2715;</button>
+  <a href="index">Home</a><a href="about">About</a><a href="insights">Insights</a><a href="videos">Videos</a><a href="podcast">Podcast</a><a href="events">Events</a><a href="community">Community</a><a href="media">Media</a><a href="contact">Contact</a>
+  <a href="community" class="btn btn-primary" style="margin-top:12px">Join Free</a>
+</div>
+<div class="page-hero"><div class="page-hero-bg"></div>
+<div class="wrap">
+  <span class="tag tag-pk">Contact</span>
+  <h1>Get in <span class="g-pk">touch.</span></h1>
+  <p>Pitch a conversation, suggest a topic, propose a collaboration, or just say hello. We read everything.</p>
+</div></div>
+
+<section class="section-sm"><div class="wrap">
+<div class="grid-2" style="gap:56px;align-items:start">
+<div class="sr">
+  <h2 class="display-sm" style="margin-bottom:16px">Ways to <span class="g-pk">reach us.</span></h2>
+  <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+    <div class="card card-body" style="display:flex;align-items:flex-start;gap:13px"><span style="font-size:20px;flex-shrink:0">&#9993;</span><div><strong style="font-size:14px;display:block;margin-bottom:2px">Email</strong><a href="mailto:info@technoaigenius.com" style="color:var(--cy);font-size:13px">info@technoaigenius.com</a></div></div>
+    <div class="card card-body" style="display:flex;align-items:flex-start;gap:13px"><span style="font-size:20px;flex-shrink:0">&#9654;</span><div><strong style="font-size:14px;display:block;margin-bottom:2px">YouTube</strong><a href="https://www.youtube.com/@MindwareToMetaverse" target="_blank" rel="noopener" style="color:var(--cy);font-size:13px">@MindwareToMetaverse</a></div></div>
+  </div>
+  <h3 style="font-size:17px;font-weight:800;margin-bottom:12px">What we're looking for:</h3>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div class="card card-body" style="padding:12px 16px"><div style="font-size:13.5px;font-weight:600;margin-bottom:3px">&#127897; Conversation Guests</div><p style="font-size:12.5px;color:var(--sub)">Researchers, founders, ethicists, practitioners with perspectives worth sharing with a student audience.</p></div>
+    <div class="card card-body" style="padding:12px 16px"><div style="font-size:13.5px;font-weight:600;margin-bottom:3px">&#128218; Guest Contributors</div><p style="font-size:12.5px;color:var(--sub)">Writers who want to contribute original insights on AI, technology, or the future.</p></div>
+    <div class="card card-body" style="padding:12px 16px"><div style="font-size:13.5px;font-weight:600;margin-bottom:3px">&#128101; Community Partners</div><p style="font-size:12.5px;color:var(--sub)">Schools, organizations, or individuals who want to collaborate on events or initiatives.</p></div>
+  </div>
+</div>
+<div class="sr d1">
+  <div class="card card-body-lg">
+    <h3 style="font-size:19px;font-weight:800;margin-bottom:5px">Send a Message</h3>
+    <p style="font-size:13.5px;color:var(--sub);margin-bottom:22px">We respond to every genuine message. Usually within a few days.</p>
+    <form id="contact-form" onsubmit="submitContact(event)" novalidate>
+      <div class="form-group"><label>Your Name *</label><input class="form-input" name="name" required></div>
+      <div class="form-group"><label>Email *</label><input class="form-input" type="email" name="email" required></div>
+      <div class="form-group"><label>Subject</label>
+        <select class="form-select" name="subject">
+          <option value="">Select a topic</option>
+          <option>Pitch a conversation/interview</option>
+          <option>Guest contribution</option>
+          <option>Event collaboration</option>
+          <option>Partnership inquiry</option>
+          <option>General message</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Message *</label>
+        <textarea class="form-textarea" name="message" style="min-height:120px" placeholder="Tell us what's on your mind..." required></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
+    <div id="contact-success" class="form-success">
+      <div style="font-size:44px;margin-bottom:12px">&#9989;</div>
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">Message received.</h3>
+      <p style="color:var(--sub);font-size:14px">Thanks for reaching out. We'll get back to you within a few days.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div></section>
+<footer>
+<div class="wrap">
+<div class="foot-grid">
+  <div class="foot-brand">
+    <a href="index" class="nav-logo">
+      <img src="assets/logo.svg" alt="Techno AI Genius" style="height:28px;width:auto">
+       
+    </a>
+    <p>AI education built for the generation that will actually live with this technology. Open, honest, free â€” always.</p>
+    <div class="socials">
+      <a href="https://www.youtube.com/@MindwareToMetaverse" target="_blank" rel="noopener" class="soc-btn" title="YouTube">&#9654;</a>
+      <a href="mailto:info@technoaigenius.com" class="soc-btn" title="Email">&#9993;</a>
+    </div>
+  </div>
+  <div class="foot-col"><h4>Content</h4><ul>
+    <li><a href="insights">Insights</a></li>
+    <li><a href="insights?type=article">Articles</a></li>
+    <li><a href="insights?type=opinion">Opinions</a></li>
+    <li><a href="insights?type=conversation">Conversations</a></li>
+    <li><a href="videos">Videos</a></li>
+    <li><a href="podcast">Podcast</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>Platform</h4><ul>
+    <li><a href="events">Events</a></li>
+    <li><a href="community">Community</a></li>
+    <li><a href="media">Media</a></li>
+    <li><a href="about">About TAG</a></li>
+    <li><a href="contact">Contact</a></li>
+  </ul></div>
+  <div class="foot-col"><h4>Connect</h4><ul>
+    <li><a href="https://www.youtube.com/@MindwareToMetaverse" target="_blank">YouTube</a></li>
+    <li><a href="mailto:info@technoaigenius.com">Email Us</a></li>
+    <li><a href="sitemap.xml">Sitemap</a></li>
+  </ul></div>
+</div>
+<div class="foot-bottom">
+  <p>&copy; 2024 <span>Techno AI Genius</span>. Founded by Varish Gahlot, South Brunswick HS, NJ.</p>
+  <p>Free, always &mdash; for every student, everywhere.</p>
+</div>
+</div>
+</footer>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

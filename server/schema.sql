@@ -1,0 +1,126 @@
+DROP TABLE IF EXISTS admin_users CASCADE;
+DROP TABLE IF EXISTS settings CASCADE;
+DROP TABLE IF EXISTS insights CASCADE;
+DROP TABLE IF EXISTS videos CASCADE;
+DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS podcasts CASCADE;
+DROP TABLE IF EXISTS gallery CASCADE;
+DROP TABLE IF EXISTS community CASCADE;
+
+CREATE TABLE admin_users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE settings (
+  key VARCHAR(100) PRIMARY KEY,
+  value TEXT NOT NULL
+);
+
+CREATE TABLE insights (
+  id VARCHAR(50) PRIMARY KEY,
+  type VARCHAR(30) NOT NULL DEFAULT 'article',
+  title VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) UNIQUE NOT NULL,
+  subcategory VARCHAR(100),
+  category VARCHAR(100),
+  tags TEXT[],
+  excerpt TEXT,
+  body TEXT,
+  image INTEGER,
+  image_data TEXT,
+  featured_image TEXT,
+  author VARCHAR(100) DEFAULT 'Varish Gahlot',
+  status VARCHAR(20) NOT NULL DEFAULT 'draft',
+  visibility BOOLEAN NOT NULL DEFAULT TRUE,
+  featured BOOLEAN NOT NULL DEFAULT FALSE,
+  date VARCHAR(20),
+  read_time VARCHAR(20),
+  seo JSONB,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE videos (
+  id VARCHAR(50) PRIMARY KEY,
+  youtube_id VARCHAR(50) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  series VARCHAR(255),
+  playlist VARCHAR(100),
+  topic VARCHAR(100),
+  featured BOOLEAN NOT NULL DEFAULT FALSE,
+  visibility BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE events (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  date VARCHAR(20) NOT NULL,
+  type VARCHAR(50) NOT NULL DEFAULT 'online',
+  capacity VARCHAR(20),
+  status VARCHAR(20) NOT NULL DEFAULT 'upcoming',
+  visibility BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE podcasts (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  duration VARCHAR(20),
+  episode VARCHAR(50),
+  date VARCHAR(20),
+  status VARCHAR(20) NOT NULL DEFAULT 'upcoming',
+  embed_url TEXT,
+  visibility BOOLEAN NOT NULL DEFAULT TRUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE gallery (
+  id VARCHAR(50) PRIMARY KEY,
+  filename VARCHAR(255) NOT NULL,
+  url TEXT NOT NULL,
+  type VARCHAR(50),
+  size INTEGER,
+  category VARCHAR(50) DEFAULT 'general',
+  caption TEXT,
+  alt VARCHAR(255),
+  uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE community (
+  id VARCHAR(50) PRIMARY KEY,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100),
+  email VARCHAR(150) NOT NULL,
+  role VARCHAR(100),
+  country VARCHAR(100),
+  message TEXT,
+  newsletter BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Contact form submissions
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(200) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  subject VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Newsletter subscribers
+CREATE TABLE IF NOT EXISTS subscribers (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

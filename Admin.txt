@@ -1,0 +1,18 @@
+Techno AI Genius — Admin Access (v5)
+
+URL:      admin.html
+Password: TAGAdmin2024
+
+Architecture: Service-layer CMS (localStorage backend, API-ready)
+Change password: Admin panel → Settings → Change Password
+
+Service layer: /services/
+  storageService.js  — all persistence (swap for real API)
+  authService.js     — authentication
+  insightService.js  — articles, opinions, conversations
+  videoService.js    — video + playlists
+  mediaService.js    — media library
+  apiService.js      — API gateway (flip USE_API=true when ready)
+
+Backend upgrade: set USE_API=true + API_BASE in services/apiService.js
+Recommended: Node.js + Express + MongoDB  OR  Next.js + Supabase
