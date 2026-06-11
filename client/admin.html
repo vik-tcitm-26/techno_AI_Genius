@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin â€” Techno AI Genius</title>
+<title>Admin — Techno AI Genius</title>
  <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- â”€â”€ LOGIN â”€â”€ -->
+<!-- ── LOGIN ── -->
 <div id="admin-login" class="admin-login-wrap" style="display:none">
 <div class="orb orb-1" style="position:fixed"></div>
 <div class="orb orb-2" style="position:fixed"></div>
@@ -35,14 +35,14 @@
 </div>
 </div>
 
-<!-- â”€â”€ ADMIN SHELL â”€â”€ -->
+<!-- ── ADMIN SHELL ── -->
 <div id="admin-shell">
 
 <!-- Topbar -->
 <div class="admin-topbar">
   <span class="admin-topbar-title">Dashboard</span>
   <div style="display:flex;align-items:center;gap:8px">
-    <a href="index" target="_blank" class="btn btn-ghost btn-sm">&#8599; View Site</a>
+    <a href="index" target="_blank" class="btn btn-ghost btn-sm">↗ View Site</a>
     <button onclick="adminLogout()" class="btn btn-ghost btn-sm">Sign Out</button>
   </div>
 </div>
@@ -52,35 +52,34 @@
   <div class="admin-sidebar-logo">
     <a href="index" class="nav-logo">
     <img src="assets/logo.svg" alt="Techno AI Genius" style="height:32px;width:auto">
-     
   </a>
   </div>
 
-  <button class="admin-nav-item" data-sec="dash" onclick="navTo('dash',this)"><span class="ni">&#128202;</span>Dashboard</button>
+  <button class="admin-nav-item" data-sec="dash" onclick="navTo('dash',this)"><span class="ni">📊</span>Dashboard</button>
   <div class="admin-nav-sep"></div>
 
   <div style="padding:5px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Content</div>
-  <button class="admin-nav-item" data-sec="insights" onclick="navTo('insights',this)"><span class="ni">&#128218;</span>Insights</button>
-  <button class="admin-nav-item" data-sec="videos" onclick="navTo('videos',this)"><span class="ni">&#127916;</span>Videos</button>
-  <button class="admin-nav-item" data-sec="podcasts" onclick="navTo('podcasts',this)"><span class="ni">&#127911;</span>Podcast</button>
+  <button class="admin-nav-item" data-sec="insights" onclick="navTo('insights',this)"><span class="ni">📘</span>Insights</button>
+  <button class="admin-nav-item" data-sec="videos" onclick="navTo('videos',this)"><span class="ni">🎬</span>Videos</button>
+  <button class="admin-nav-item" data-sec="podcasts" onclick="navTo('podcasts',this)"><span class="ni">🎙️</span>Podcast</button>
   <div class="admin-nav-sep"></div>
 
   <div style="padding:5px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Community</div>
-  <button class="admin-nav-item" data-sec="events" onclick="navTo('events',this)"><span class="ni">&#128197;</span>Events</button>
-  <button class="admin-nav-item" data-sec="community" onclick="navTo('community',this)"><span class="ni">&#128101;</span>Members</button>
-  <button class="admin-nav-item" data-sec="contacts" onclick="navTo('contacts',this)"><span class="ni">&#128233;</span>Contact Messages</button>
-  <button class="admin-nav-item" data-sec="subscribers" onclick="navTo('subscribers',this)"><span class="ni">&#128240;</span>Subscribers</button>
+  <button class="admin-nav-item" data-sec="events" onclick="navTo('events',this)"><span class="ni">📅</span>Events</button>
+  <button class="admin-nav-item" data-sec="community" onclick="navTo('community',this)"><span class="ni">👥</span>Members</button>
+  <button class="admin-nav-item" data-sec="contacts" onclick="navTo('contacts',this)"><span class="ni">📧</span>Contact Messages</button>
+  <button class="admin-nav-item" data-sec="subscribers" onclick="navTo('subscribers',this)"><span class="ni">📰</span>Subscribers</button>
   <div class="admin-nav-sep"></div>
 
   <div style="padding:5px 16px 4px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)">Assets & Config</div>
-  <button class="admin-nav-item" data-sec="gallery" onclick="navTo('gallery',this)"><span class="ni">&#128247;</span>Media Library</button>
-  <button class="admin-nav-item" data-sec="settings" onclick="navTo('settings',this)"><span class="ni">&#9881;</span>Settings</button>
+  <button class="admin-nav-item" data-sec="gallery" onclick="navTo('gallery',this)"><span class="ni">📷</span>Media Library</button>
+  <button class="admin-nav-item" data-sec="settings" onclick="navTo('settings',this)"><span class="ni">⚙️</span>Settings</button>
 </div>
 
 <!-- Main Content -->
 <div class="admin-content">
 
-<!-- â”€â”€ DASHBOARD â”€â”€ -->
+<!-- ── DASHBOARD ── -->
 <div id="sec-dash" class="admin-section">
   <div class="stat-cards">
     <div class="stat-card" style="border-top:2px solid var(--cy)"><span class="sc-num g-cy" id="stat-insights">0</span><span class="sc-lbl">Total Insights</span></div>
@@ -103,31 +102,31 @@
     <div class="card card-body-lg">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:14px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em">Quick Actions</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button class="btn btn-outline" onclick="navTo('insights');openInsightModal(null)" style="justify-content:flex-start;gap:10px"><span>&#128218;</span> New Article</button>
-        <button class="btn btn-outline" onclick="navTo('insights');openInsightModal(null)" style="justify-content:flex-start;gap:10px"><span>&#9997;</span> New Opinion</button>
-        <button class="btn btn-outline" onclick="navTo('videos');openVideoModal(null)" style="justify-content:flex-start;gap:10px"><span>&#127916;</span> Add Video</button>
-        <button class="btn btn-outline" onclick="navTo('events');openEventModal(null)" style="justify-content:flex-start;gap:10px"><span>&#128197;</span> New Event</button>
-        <button class="btn btn-outline" onclick="navTo('podcasts');openPodcastModal(null)" style="justify-content:flex-start;gap:10px"><span>&#127911;</span> New Podcast Episode</button>
+        <button class="btn btn-outline" onclick="navTo('insights');openInsightModal(null)" style="justify-content:flex-start;gap:10px"><span>📘</span> New Article</button>
+        <button class="btn btn-outline" onclick="navTo('insights');openInsightModal(null)" style="justify-content:flex-start;gap:10px"><span>✍️</span> New Opinion</button>
+        <button class="btn btn-outline" onclick="navTo('videos');openVideoModal(null)" style="justify-content:flex-start;gap:10px"><span>🎬</span> Add Video</button>
+        <button class="btn btn-outline" onclick="navTo('events');openEventModal(null)" style="justify-content:flex-start;gap:10px"><span>📅</span> New Event</button>
+        <button class="btn btn-outline" onclick="navTo('podcasts');openPodcastModal(null)" style="justify-content:flex-start;gap:10px"><span>🎙️</span> New Podcast Episode</button>
       </div>
     </div>
     <div class="card card-body-lg">
       <h3 style="font-size:14px;font-weight:700;margin-bottom:14px;color:var(--sub);text-transform:uppercase;letter-spacing:.06em">Site Links</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <a href="insights" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>&#128218;</span> Insights Page</a>
-        <a href="videos" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>&#127916;</span> Videos</a>
-        <a href="events" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>&#128197;</span> Events</a>
-        <a href="media" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>&#128247;</span> Media Gallery</a>
-        <a href="contact" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>&#128222;</span> Contact</a>
+        <a href="insights" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>📘</span> Insights Page</a>
+        <a href="videos" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>🎬</span> Videos</a>
+        <a href="events" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>📅</span> Events</a>
+        <a href="media" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>📷</span> Media Gallery</a>
+        <a href="contact" target="_blank" class="btn btn-ghost" style="justify-content:flex-start;gap:10px"><span>☎️</span> Contact</a>
       </div>
     </div>
   </div>
 
   <div class="card card-body-lg" style="margin-top:16px;background:var(--s1);border:1px dashed rgba(151,71,255,.2)">
-    <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--vi)">&#127760; Backend Upgrade Path</h3>
-    <p style="font-size:12.5px;color:var(--sub);line-height:1.7;margin-bottom:10px">Current: localStorage via service layer. Ready for API upgrade â€” swap <code style="color:var(--cy);background:var(--s2);padding:1px 5px;border-radius:3px">USE_API = true</code> in <code style="color:var(--cy);background:var(--s2);padding:1px 5px;border-radius:3px">services/apiService.js</code> and set <code style="color:var(--cy);background:var(--s2);padding:1px 5px;border-radius:3px">API_BASE</code> to your endpoint. No frontend rewrites needed.</p>
+    <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:var(--vi)">🌐 Backend Upgrade Path</h3>
+    <p style="font-size:12.5px;color:var(--sub);line-height:1.7;margin-bottom:10px">Current: localStorage via service layer. Ready for API upgrade — swap <code style="color:var(--cy);background:var(--s2);padding:2px 4px;border-radius:3px">storageService</code></p>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       <span class="tag tag-cy">Node.js + Express</span>
-      <span class="tag tag-li">MongoDB</span>
+      <span class="tag tag-li">PostgreSQL</span>
       <span class="tag tag-vi">Supabase</span>
       <span class="tag tag-pk">Cloudinary</span>
       <span class="tag tag-or">JWT Auth</span>
@@ -135,7 +134,7 @@
   </div>
 </div>
 
-<!-- â”€â”€ INSIGHTS â”€â”€ -->
+<!-- ── INSIGHTS ── -->
 <div id="sec-insights" class="admin-section">
   <div class="admin-sec-head">
     <h2>Insights</h2>
@@ -155,7 +154,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ VIDEOS â”€â”€ -->
+<!-- ── VIDEOS ── -->
 <div id="sec-videos" class="admin-section">
   <div class="admin-sec-head"><h2>Videos</h2><button class="btn btn-primary btn-sm" onclick="openVideoModal(null)">+ Add Video</button></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -164,7 +163,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ PODCASTS â”€â”€ -->
+<!-- ── PODCASTS ── -->
 <div id="sec-podcasts" class="admin-section">
   <div class="admin-sec-head"><h2>Podcast Episodes</h2><button class="btn btn-primary btn-sm" onclick="openPodcastModal(null)">+ New Episode</button></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -173,7 +172,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ EVENTS â”€â”€ -->
+<!-- ── EVENTS ── -->
 <div id="sec-events" class="admin-section">
   <div class="admin-sec-head"><h2>Events</h2><button class="btn btn-primary btn-sm" onclick="openEventModal(null)">+ New Event</button></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -182,7 +181,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ MEMBERS â”€â”€ -->
+<!-- ── MEMBERS ── -->
 <div id="sec-community" class="admin-section">
   <div class="admin-sec-head"><h2>Community Members</h2></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -191,7 +190,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ CONTACT MESSAGES â”€â”€ -->
+<!-- ── CONTACT MESSAGES ── -->
 <div id="sec-contacts" class="admin-section">
   <div class="admin-sec-head"><h2>Contact Messages</h2></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -200,7 +199,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ SUBSCRIBERS â”€â”€ -->
+<!-- ── SUBSCRIBERS ── -->
 <div id="sec-subscribers" class="admin-section">
   <div class="admin-sec-head"><h2>Newsletter Subscribers</h2></div>
   <div class="tbl-wrap"><table class="admin-tbl">
@@ -209,7 +208,7 @@
   </table></div>
 </div>
 
-<!-- â”€â”€ MEDIA LIBRARY â”€â”€ -->
+<!-- ── MEDIA LIBRARY ── -->
 <div id="sec-gallery" class="admin-section">
   <div class="admin-sec-head"><h2>Media Library</h2></div>
   <div class="card card-body-lg" style="margin-bottom:16px">
@@ -217,21 +216,23 @@
     <div class="upload-area" onclick="document.getElementById('gallery-file-input').click()"
       ondragover="this.classList.add('drag');event.preventDefault()"
       ondragleave="this.classList.remove('drag')"
-      ondrop="this.classList.remove('drag');event.preventDefault();handleGalleryUpload({files:event.dataTransfer.files})">
-      <div class="upload-icon">&#128444;</div>
-      <p>Click or drag images here â€” multi-upload supported</p>
+      ondrop="this.classList.remove('drag');event.preventDefault();handleGalleryFileSelect({files:event.dataTransfer.files})">
+      <div class="upload-icon">📁</div>
+      <p>Click or drag images here — multi-upload supported</p>
       <p style="font-size:11px;margin-top:4px">JPG, PNG, GIF, WebP</p>
-      <input type="file" id="gallery-file-input" accept="image/*" multiple onchange="handleGalleryUpload(this)">
+      <input type="file" id="gallery-file-input" accept="image/*" multiple onchange="handleGalleryFileSelect(this)">
     </div>
     <div class="form-group" style="margin-top:12px">
-      <label>Caption <span style="color:var(--mut)">(optional â€” applies to all uploaded files)</span></label>
+      <label>Caption <span style="color:var(--mut)">(optional — applies to all uploaded files)</span></label>
       <input class="form-input" id="gallery-caption" placeholder="Caption for this batch">
     </div>
+    <button id="gallery-upload-btn" class="btn btn-primary" onclick="handleGalleryUpload()" style="width:100%;margin-top:8px" disabled>Upload Files</button>
+    <p style="font-size:11px;color:var(--sub);margin-top:8px">Select images and optional caption, then click Upload to save to Cloudinary and database.</p>
   </div>
   <div class="gallery-grid" id="gallery-admin-grid"></div>
 </div>
 
-<!-- â”€â”€ SETTINGS â”€â”€ -->
+<!-- ── SETTINGS ── -->
 <div id="sec-settings" class="admin-section">
   <div class="admin-sec-head"><h2>Settings</h2></div>
   <div class="grid-2" style="gap:16px;align-items:start">
@@ -242,7 +243,7 @@
         <div class="form-group"><label>Contact Email</label><input class="form-input" id="cfg-email" type="email"></div>
         <div class="form-group"><label>YouTube Channel URL</label><input class="form-input" id="cfg-youtube"></div>
         <div class="form-group">
-          <label>Formspree Form ID <span style="color:var(--sub);font-size:10.5px">(get free at formspree.io â€” enables real email delivery)</span></label>
+          <label>Formspree Form ID <span style="color:var(--sub);font-size:10.5px">(get free at formspree.io — enables real email delivery)</span></label>
           <input class="form-input" id="cfg-formspree" placeholder="xyzabcd">
         </div>
         <button class="btn btn-primary" onclick="saveSettings()" style="width:100%;margin-top:4px">Save Settings</button>
@@ -265,7 +266,7 @@
       <div class="settings-group" style="background:rgba(255,60,172,.04);border-color:rgba(255,60,172,.15)">
         <h4 style="color:var(--pk)">Reset All Data</h4>
         <p style="font-size:12px;color:var(--sub);margin-bottom:14px">Clears all localStorage and reloads seed data. Use for testing only.</p>
-        <button class="btn btn-pk btn-sm" onclick="if(confirm('Delete ALL content and reset to defaults?')){storageService.resetAll();location.reload();}">&#9888; Reset All Data</button>
+        <button class="btn btn-pk btn-sm" onclick="if(confirm('Delete ALL content and reset to defaults?')){storageService.resetAll();location.reload();}">⚠️ Reset All Data</button>
       </div>
     </div>
   </div>
@@ -274,10 +275,10 @@
 </div><!-- /admin-content -->
 </div><!-- /admin-shell -->
 
-<!-- â”€â”€ INSIGHT MODAL â”€â”€ -->
+<!-- ── INSIGHT MODAL ── -->
 <div id="insight-modal" class="modal-overlay">
 <div class="admin-modal-box">
-  <button class="modal-close" onclick="closeAdminModal('insight-modal')">&#x2715;</button>
+  <button class="modal-close" onclick="closeAdminModal('insight-modal')">✕</button>
   <h3>New Content</h3>
   <div class="form-row">
     <div class="form-group"><label>Type</label>
@@ -295,9 +296,9 @@
   <div class="form-row">
     <div class="form-group"><label>Subcategory</label>
       <select class="form-select" id="im2-subcat">
-        <option>AI &amp; Technology</option><option>Future of Humanity</option><option>Innovation</option>
+        <option>AI & Technology</option><option>Future of Humanity</option><option>Innovation</option>
         <option>Thought Leadership</option><option>Deep Conversations</option>
-        <option>Industry Analysis</option><option>Research &amp; Vision</option>
+        <option>Industry Analysis</option><option>Research & Vision</option>
       </select>
     </div>
     <div class="form-group"><label>Category Tag</label><input class="form-input" id="im2-category" placeholder="e.g. Ethics, Explainer"></div>
@@ -308,11 +309,11 @@
   </div>
   <div class="form-group"><label>Tags <span style="color:var(--sub);font-size:10px">(comma separated)</span></label><input class="form-input" id="im2-tags" placeholder="AI, Ethics, Education"></div>
   <div class="form-group"><label>Excerpt</label><textarea class="form-textarea" id="im2-excerpt" placeholder="Short summary shown on cards" style="min-height:55px"></textarea></div>
-  <div class="form-group"><label>Body <span style="color:var(--sub);font-size:10px">(HTML supported â€” use &lt;p&gt;, &lt;h2&gt;, &lt;strong&gt;, &lt;div class="pullquote"&gt;)</span></label>
+  <div class="form-group"><label>Body <span style="color:var(--sub);font-size:10px">(HTML supported — use &lt;p&gt;, &lt;h2&gt;, &lt;strong&gt;, &lt;div class="pullquote"&gt;)</span></label>
     <textarea class="form-textarea" id="im2-body" style="min-height:160px" placeholder="&lt;p&gt;Your content...&lt;/p&gt;"></textarea>
   </div>
   <div class="form-row">
-    <div class="form-group"><label>Image # <span style="color:var(--sub);font-size:10px">(1â€“15)</span></label><input class="form-input" type="number" id="im2-imgnum" min="1" max="15" value="1"></div>
+    <div class="form-group"><label>Image # <span style="color:var(--sub);font-size:10px">(1–15)</span></label><input class="form-input" type="number" id="im2-imgnum" min="1" max="15" value="1"></div>
     <div class="form-group"><label>Featured</label><div style="margin-top:8px"><label class="toggle"><input type="checkbox" id="im2-featured"><span class="toggle-slider"></span></label></div></div>
   </div>
   <div class="form-group"><label>Upload Image <span style="color:var(--sub);font-size:10px">(overrides image #)</span></label>
@@ -334,10 +335,10 @@
 </div>
 </div>
 
-<!-- â”€â”€ VIDEO MODAL â”€â”€ -->
+<!-- ── VIDEO MODAL ── -->
 <div id="video-modal" class="modal-overlay">
 <div class="admin-modal-box">
-  <button class="modal-close" onclick="closeAdminModal('video-modal')">&#x2715;</button>
+  <button class="modal-close" onclick="closeAdminModal('video-modal')">✕</button>
   <h3>Add Video</h3>
   <div class="form-group"><label>Title *</label><input class="form-input" id="vm-title" placeholder="Video title"></div>
   <div class="form-row">
@@ -345,7 +346,7 @@
     <div class="form-group"><label>Series</label>
       <select class="form-select" id="vm-series">
         <option>The AI Age</option>
-        <option>Abstract Thought &#8594; Virtual Reality</option>
+        <option>Abstract Thought → Virtual Reality</option>
       </select>
     </div>
   </div>
@@ -361,10 +362,10 @@
 </div>
 </div>
 
-<!-- â”€â”€ EVENT MODAL â”€â”€ -->
+<!-- ── EVENT MODAL ── -->
 <div id="event-modal" class="modal-overlay">
 <div class="admin-modal-box">
-  <button class="modal-close" onclick="closeAdminModal('event-modal')">&#x2715;</button>
+  <button class="modal-close" onclick="closeAdminModal('event-modal')">✕</button>
   <h3>New Event</h3>
   <div class="form-group"><label>Title *</label><input class="form-input" id="em-title"></div>
   <div class="form-group"><label>Description</label><textarea class="form-textarea" id="em-desc" style="min-height:70px"></textarea></div>
@@ -387,10 +388,10 @@
 </div>
 </div>
 
-<!-- â”€â”€ PODCAST MODAL â”€â”€ -->
+<!-- ── PODCAST MODAL ── -->
 <div id="podcast-modal" class="modal-overlay">
 <div class="admin-modal-box">
-  <button class="modal-close" onclick="closeAdminModal('podcast-modal')">&#x2715;</button>
+  <button class="modal-close" onclick="closeAdminModal('podcast-modal')">✕</button>
   <h3>New Episode</h3>
   <div class="form-group"><label>Title *</label><input class="form-input" id="pm-title"></div>
   <div class="form-row">
@@ -404,7 +405,7 @@
     </div>
   </div>
   <div class="form-group"><label>Description</label><textarea class="form-textarea" id="pm-desc" style="min-height:60px"></textarea></div>
-  <div class="form-group"><label>Embed URL <span style="color:var(--sub);font-size:10px">(Spotify/Apple embed src)</span></label><input class="form-input" id="pm-embed" placeholder="https://open.spotify.com/embed/..."></div>
+  <div class="form-group"><label>Embed URL <span style="color:var(--sub);font-size:10px">(Spotify/Apple embed src)</span></label><input class="form-input" id="pm-embed" placeholder="https://open.spotify.com/embed/episode/..."></div>
   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
     <button class="btn btn-ghost btn-sm" onclick="closeAdminModal('podcast-modal')">Cancel</button>
     <button class="btn btn-primary btn-sm" onclick="savePodcastModal()">Save</button>
